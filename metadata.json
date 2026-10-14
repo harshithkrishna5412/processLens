@@ -1,0 +1,8 @@
+{
+  "name": "AP Food Logistics Regulatory Re-engineering Lab",
+  "description": "Regulatory workflow re-engineering prototype for food processing and cold-chain compliance in Andhra Pradesh, featuring FSSAI FoSCoS integration, reusable profiles, and document intelligence.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
