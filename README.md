@@ -1,203 +1,372 @@
-# ProcessLens AI — AI-Powered Government Process Simplification Platform
+# ProcessLens AI
+### AI-Powered Government Process Simplification Platform
 
-> **A two-layer regulatory intelligence and supply-chain readiness engine.**  
-> Built for the Government of Andhra Pradesh Ease of Doing Business (EODB) framework, modeling food processing and cold-chain compliance (FSSAI FoSCoS, AP Single Desk, APPCB, Fire Services, and APEPDCL).
+**ProcessLens AI** is an AI-assisted regulatory process-reengineering platform designed to explore how government permissions, licences, and registrations can become simpler, more transparent, and less burdensome for citizens and businesses.
 
----
+Built around the Ease of Doing Business (EODB) context in Andhra Pradesh, the platform combines regulatory workflow analysis, reusable applicant information, document inconsistency detection, and operational readiness simulation. Its cold-chain logistics case study demonstrates how delays in regulatory clearances can affect business commissioning and perishable-goods supply chains.
 
-## 1. Overview: What ProcessLens AI Does
-
-ProcessLens AI simplifies complex, multi-agency government approval processes by transforming fragmented sequential compliance pipelines into transparent, concurrent, and legally grounded workflows:
-
-1. **Regulatory Workflow Explorer**:
-   - Compares the **Current As-Is Process** (14 sequential stages, 6 disconnected portals, 7 physical visits, 124 business days) with a **Redesigned 4-Phase Concurrency Model** (38 business days, 2 physical visits).
-   - Allows users to **add, edit, and delete process steps**, modifying durations, physical visit requirements, and statutory classifications in real-time.
-   - Grounded in statutory authorities: *AP Single Desk Clearance Act 2015 (Sec 12 Deemed Approvals & Sec 15 Joint Inspections)*, *FSS Act 2006*, *Water & Air Acts*, and *AP Fire Service Act 1999*.
-   - Clearly differentiates **Existing Statutory Law**, **Existing Executive Rules**, and **Proposed Policy Reforms**.
-
-2. **Reusable Applicant Profile & Statutory Field Mapper**:
-   - Single Source of Truth (SSOT) capturing corporate KYC, land coordinates, refrigeration capacity (2,500 MT, Ammonia R-717), and utility demands.
-   - Maps enterprise details dynamically to 4 distinct departmental application forms (*FSSAI FoSCoS Form B*, *AP Single Desk CAF*, *APPCB CTE*, and *GVMC Trade License*).
-   - Enforces legal governance badges: **Approved Reuse**, **Format Converted**, **Must Verify Independently** (e.g. NABL water test), and **Legally Restricted** (e.g. FoSTaC certified supervisor mandates).
-   - Fully persistent via browser `localStorage`, with JSON Import/Export capabilities.
-
-3. **AI Document Assistant & Inconsistency Auditor**:
-   - Supports uploading real documents (`.pdf`, `.txt`, `.json`, `.csv`, `.md`, `.png`, `.jpg`, `.jpeg` up to 10 MB) alongside 6 pre-packaged synthetic dossiers.
-   - Extracts key parameters and detects cross-document contradictions (e.g., covered plinth area mismatches, 150 kVA grid feasibility vs 280 kVA motor demand, missing ammonia emergency scrubbers).
-   - Graceful error handling for corrupted, unreadable, or oversized attachments.
-   - All findings are labeled as AI decision-support suggestions requiring human officer verification.
-
-4. **Operational Readiness & ColdOps Intelligence (Two-Layer Integration)**:
-   - Connects regulatory clearance velocity directly to the physical commissioning critical path (*Civil Foundation → PUF Panels & Compressors → 11kV Substation Energization → Chamber Pre-cooling → Commercial Cargo Inflow*).
-   - **Interactive Delay Simulator**: Models how a +15 to +60 day delay in regulatory approvals postpones warehouse go-live, burns ₹42,000/day in generator diesel fuel, and strands perishable harvest intake.
-   - **Chamber Telemetry & FEFO Dispatch**: Real-time temperature monitoring across 4 cold rooms, live temperature excursion alerts (-18.2°C breach), and First-Expired, First-Out (FEFO) inventory queue.
-
-5. **Measurable Impact Dashboard & Report Export**:
-   - Dynamic calculations reacting to user workflow modifications: physical visits (-71%), repeated data fields (-79%), document submissions (-77%), and turnaround days (-69%).
-   - One-click **Download Audit Report**: Generates formatted PDF documents (via native print engine), structured Markdown files (`.md`), or machine-readable JSON dossiers (`.json`).
+> **Project status:** Prototype and decision-support demonstration. Modeled timelines, simulated telemetry, and proposed workflow changes are illustrative and are not official government commitments or approvals.
 
 ---
 
-## 2. Technology Stack
+## 1. Problem Statement
 
-- **Frontend Core**: React 19, TypeScript 7, Vite 8
-- **Styling**: Tailwind CSS v4, Lucide React Icons
-- **Animation & Transitions**: Motion (Framer Motion v12)
-- **AI & Reasoning Engine**: `@google/genai` TypeScript SDK (Gemini 3.8 Flash) with a high-precision deterministic statutory legal rules engine fallback
-- **Server Runtime (Optional Full-Stack)**: Express 4, Node.js / `tsx`
+Government approval processes can involve multiple departments, overlapping documentation requirements, disconnected application systems, and repeated physical visits. Applicants may find it difficult to understand which permissions are required, which documents are missing, and which activities can proceed in parallel.
+
+These challenges can increase administrative effort, delay projects, and create uncertainty for citizens, entrepreneurs, and businesses.
+
+ProcessLens AI explores a structured, technology-assisted approach to identifying redundant steps, improving document readiness, and designing more transparent workflows without assuming that statutory requirements can be bypassed.
+
+## 2. Objectives
+
+- Simplify the discovery and understanding of government approval processes.
+- Reduce repeated entry of applicant information across forms.
+- Identify missing information and inconsistencies across submitted documents.
+- Distinguish existing legal requirements from proposed administrative improvements.
+- Model the operational and financial consequences of approval delays.
+- Provide transparent, exportable reports to support human review and decision-making.
+
+## 3. Key Features
+
+### 3.1 Regulatory Workflow Explorer
+
+Compare an existing workflow with a proposed process-reengineering model.
+
+**Capabilities**
+- View and modify process steps, durations, departments, and physical-visit requirements.
+- Add, edit, and remove workflow stages.
+- Recalculate modeled turnaround times and other metrics as assumptions change.
+- Explore potential parallel processing of independent activities.
+- Classify workflow elements as existing statutory requirements, executive or administrative procedures, or proposed reforms.
+
+**Illustrative case study**
+
+The cold-chain logistics demonstration includes a configurable baseline of 14 stages and a proposed four-phase workflow.
+
+The example models a change from 124 to 38 business days. These figures are simulation assumptions and must not be interpreted as verified average government processing times or guaranteed approval timelines.
+
+Parallel processing and proposed reforms remain subject to applicable laws, departmental dependencies, and approval by the competent authorities.
+
+### 3.2 Reusable Applicant Profile and Form Mapping
+
+The applicant profile provides a central place to maintain information used across the demonstration's departmental workflows.
+
+**Capabilities**
+- Store sample business identity, location, land, facility, and utility information.
+- Map common information to supported form templates.
+- Identify fields that can be reused, require conversion, need independent verification, or are legally restricted.
+- Import and export applicant profiles in JSON format.
+- Persist profile information locally in the browser.
+
+The cold-chain case study uses a sample business profile with illustrative facility capacity and utility requirements.
+
+**Privacy note:** Browser-local storage is not an encrypted document vault. Avoid entering sensitive personal, financial, or business information into a public demonstration. Data stored locally may remain on the device until it is cleared.
+
+Form mappings are informational and must be checked against the current requirements of the relevant department. Reusing information does not replace mandatory supporting documents, certifications, or independent verification.
+
+### 3.3 AI Document Assistant and Inconsistency Auditor
+
+The document assistant is designed to help applicants identify potential document issues before submitting an application.
+
+Depending on the implemented parser and available AI configuration, supported file types may include PDF, TXT, JSON, CSV, Markdown, PNG, and JPEG images, subject to file-size limits.
+
+**Example checks**
+- Inconsistent facility-area values across documents.
+- Differences between stated electrical supply capacity and equipment demand.
+- Potential omissions in cold-storage safety documentation.
+- Missing fields or information requiring further verification.
+
+The application may include synthetic demonstration dossiers for testing these scenarios.
+
+**Important limitations**
+- A detected inconsistency is a potential issue, not proof of non-compliance.
+- OCR and document extraction may produce errors, especially with scanned or low-quality files.
+- AI findings require human review.
+- A document audit does not constitute a statutory inspection, certification, or official clearance.
+
+### 3.4 ColdOps: Operational Readiness and Cold-Chain Intelligence
+
+ColdOps connects the regulatory workflow demonstration to a cold-storage facility's operational commissioning sequence.
+
+The modeled sequence includes:
+
+1. Civil foundation and infrastructure preparation.
+2. Insulation panels and refrigeration equipment installation.
+3. Electrical infrastructure and substation energization.
+4. Chamber pre-cooling and readiness checks.
+5. Commercial cargo intake.
+
+**Delay simulator**
+
+Users can explore how a modeled approval delay could postpone commissioning, increase generator fuel expenditure, and affect the handling of perishable agricultural produce.
+
+Financial outputs depend on the configured assumptions and are not audited cost estimates.
+
+**Cold-room telemetry and inventory**
+
+The demonstration may display temperature readings, excursion alerts, and a First-Expired, First-Out (FEFO) dispatch queue for sample cold rooms and inventory batches.
+
+Unless connected to actual sensors or a verified data feed, these readings and alerts are simulated demonstration data—not live facility telemetry.
+
+### 3.5 Impact Dashboard and Report Export
+
+The dashboard summarizes modeled changes between the baseline and proposed workflows.
+
+Potential metrics include:
+- Modeled processing time.
+- Estimated physical visits.
+- Repeated information fields.
+- Document-submission events.
+- Illustrative operational delay costs.
+
+The dashboard recalculates outputs using the configured workflow assumptions. Any displayed improvement percentage is a model result, not evidence of an achieved government-wide reduction.
+
+**Report formats**, where supported by the implementation:
+- PDF through the browser's print interface.
+- Markdown (`.md`).
+- JSON (`.json`).
+
+Reports are intended for analysis, documentation, and demonstration. They are not official government certificates or approvals.
 
 ---
 
-## 3. How to Install and Run Locally (Windows / macOS / Linux)
+## 4. Regulatory Scope
+
+The Andhra Pradesh EODB context and the cold-chain case study may involve authorities and systems such as:
+
+- FSSAI and its Food Safety Compliance System (FoSCoS).
+- Andhra Pradesh industrial single-window clearance mechanisms.
+- Andhra Pradesh Pollution Control Board (APPCB).
+- Relevant Fire Services authorities.
+- Electricity distribution and utility authorities.
+- The applicable local municipal authority.
+
+The exact permissions required depend on the facility, location, business activity, capacity, and applicable rules.
+
+Legal references must be verified against official legislation, rules, government notifications, and current departmental guidance before being relied upon. In particular, deemed approval, joint inspections, statutory timelines, and exemptions must not be inferred solely from the existence of a single-window clearance framework.
+
+ProcessLens AI does not independently issue licences, certify compliance, waive mandatory requirements, or replace the decisions of competent authorities.
+
+---
+
+## 5. Technology Stack
+
+The following describes the intended stack; confirm package versions and dependencies against `package.json` and the lockfile.
+
+| Component | Technology |
+|---|---|
+| Frontend | React and TypeScript |
+| Development server and bundler | Vite |
+| Styling | Tailwind CSS |
+| Icons | Lucide React |
+| Animation | Motion |
+| AI integration | Google GenAI SDK |
+| Optional server runtime | Node.js and Express |
+| Local demonstration data | Browser local storage and JSON files |
+
+A deterministic rules-based fallback may support selected demonstration workflows when live AI services are unavailable. Its coverage depends on the implemented rules and should not be described as a comprehensive statutory legal engine unless that scope has been independently validated.
+
+---
+
+## 6. Installation and Local Setup
 
 ### Prerequisites
-- [Node.js](https://nodejs.org/) version 18 or higher
-- npm (bundled with Node.js)
 
-### Step-by-Step Local Setup
+- Node.js version supported by the installed Vite release.
+- npm.
+- Git (optional, for cloning the repository).
 
-1. **Open your terminal (PowerShell or Command Prompt on Windows)**:
-   ```cmd
-   cd path\to\ProcessLens-AI
-   ```
+Check the installed versions:
 
-2. **Install dependencies**:
-   ```cmd
-   npm install
-   ```
+```bash
+node --version
+npm --version
+```
 
-3. **Start the development server**:
-   ```cmd
-   npm run dev
-   ```
+### Clone the repository
 
-4. **Open in your browser**:
-   Navigate to [http://localhost:3000](http://localhost:3000).
+Replace the placeholder URL with the actual Git repository URL.
 
----
+```bash
+git clone <your-repository-url>
+cd <your-repository-folder>
+```
 
-## 4. How to Configure Optional AI Services
+### Install dependencies
 
-ProcessLens AI is **100% functional out of the box in Demo Mode** with its built-in deterministic statutory legal rules engine. Zero API keys are required to explore workflows, edit profiles, audit documents, simulate cold-chain cascades, or export reports.
+```bash
+npm install
+```
 
-### Optional: Enabling Live Gemini AI Generation
-If you wish to enable live generative AI responses from Google's latest Gemini 3.8 Flash model:
+### Start the development server
 
-#### Option A: Client-Side (Easiest for Static Hosting)
-1. Open the app in your browser.
-2. Click the **Gear (Settings)** icon in the top-right corner of the navigation bar.
-3. Paste your free Gemini API key from [Google AI Studio](https://aistudio.google.com/apikey).
-4. Click **Save Configuration**. The key is stored solely in your personal browser's `localStorage` and is never sent to any third party.
+```bash
+npm run dev
+```
 
-#### Option B: Environment Variable (Server-Side)
-1. Copy `.env.example` to `.env`:
-   ```cmd
-   copy .env.example .env
-   ```
-2. Set your API key in `.env`:
-   ```env
-   GEMINI_API_KEY="AIzaSyYourActualKeyHere"
-   ```
-3. Restart the server (`npm run dev`).
+Open the local URL printed by Vite in the terminal. The port may differ depending on the project's configuration.
 
----
+### Build for production
 
-## 5. How to Build the Production Version
-
-To compile the application into high-performance, minified static assets:
-
-```cmd
+```bash
 npm run build
 ```
 
-The output will be generated inside the `dist/` directory:
-- `dist/index.html`
-- `dist/assets/*.js`
-- `dist/assets/*.css`
-- `dist/404.html` (SPA routing fallback for GitHub Pages)
-- `dist/_redirects` (SPA routing fallback for Cloudflare Pages and Netlify)
+If the build succeeds, the production assets are typically generated in the `dist/` directory.
 
-You can preview the production build locally with:
-```cmd
+### Preview the production build
+
+```bash
 npm run preview
 ```
 
----
+The preview URL and port are printed in the terminal.
 
-## 6. How to Deploy Free Using Selected Host
-
-ProcessLens AI is architected to be hosted **100% free forever** on static hosting platforms.
-
-### Recommended Platform: Cloudflare Pages
-**Why Cloudflare Pages?**
-- Unlimited bandwidth and free global CDN on 300+ edge locations.
-- Zero configuration for SPA routing (the included `public/_redirects` file handles `/* /index.html 200` automatically).
-- Fast, instant automated deployments from GitHub.
-
-**Deployment Steps for Cloudflare Pages**:
-1. Push your repository to [GitHub](https://github.com).
-2. Log into the [Cloudflare Dashboard](https://dash.cloudflare.com/) and go to **Workers & Pages**.
-3. Click **Create Application** → **Pages** → **Connect to Git**.
-4. Select your `ProcessLens-AI` repository.
-5. In Build Settings:
-   - **Framework preset**: `Vite`
-   - **Build command**: `npm run build`
-   - **Build output directory**: `dist`
-6. Click **Save and Deploy**. Your site will be live on `https://your-project.pages.dev` in seconds!
+**Troubleshooting:** If the development preview reports a Vite WebSocket error, inspect the terminal output and development-server status first. A preview connection failure does not by itself establish that the production build is broken.
 
 ---
 
-### Alternative: GitHub Pages
-1. Push your repository to GitHub.
-2. Go to **Settings** → **Pages**.
-3. Under **Build and deployment**, select **GitHub Actions**.
-4. Use the standard static Vite workflow (or deploy the `dist/` folder).
-5. The included `public/404.html` guarantees that refreshing any page route will not produce a 404 error.
+## 7. Optional AI Configuration
+
+The application may support a rules-based demonstration mode and an optional Gemini-powered analysis mode, depending on the implementation.
+
+### Demo mode
+
+If the configured fallback engine supports the relevant features, users can explore predefined workflows, modify sample data, run rule-based checks, and view modeled calculations without a live AI request.
+
+Demo mode does not guarantee that every document format, OCR workflow, or AI-dependent feature works offline.
+
+### Gemini integration
+
+To enable live AI analysis:
+
+1. Create and configure a Gemini API key through Google AI Studio.
+2. Follow the environment-variable or server-side configuration supported by the repository.
+3. Restart the relevant server or development process.
+4. Test a sample request and verify the returned result.
+
+For server-side configuration, an environment variable may be named `GEMINI_API_KEY` if that is what the code expects.
+
+Never commit real API keys to source control or expose them in public repositories. For public deployments, prefer server-side API calls with appropriate authentication, rate limits, input validation, and secret management.
+
+Browser-side API keys are accessible to client-side code and should not be considered secret. Review the implementation before claiming that keys or uploaded documents are never transmitted to external services.
+
+Model identifiers and availability can change. Use a currently supported model ID confirmed against the official Google documentation and the implementation.
 
 ---
 
-### Alternative: Vercel or Netlify (Free Tier)
-1. Import your GitHub repository in the Vercel or Netlify dashboard.
-2. Vercel automatically detects Vite:
-   - **Build Command**: `npm run build`
-   - **Output Directory**: `dist`
-3. Click **Deploy**.
+## 8. Deployment
+
+The frontend may be deployable to a static hosting provider if the application can operate with static assets and does not depend on an unavailable server-side API.
+
+Potential options include:
+
+- Cloudflare Pages.
+- GitHub Pages.
+- Netlify.
+- Vercel.
+
+For a typical Vite frontend, the build command is:
+
+```bash
+npm run build
+```
+
+The output directory is commonly:
+
+```text
+dist/
+```
+
+Confirm the repository's routing configuration, base path, and deployment settings before publishing.
+
+**Backend requirement:** If live AI requests or other functionality depend on Express routes, deploying only the static frontend will not automatically deploy those routes. Deploy the backend separately or implement compatible serverless functions and configure the frontend to call them.
+
+Free-tier availability, quotas, and hosting terms are subject to change. No hosting provider should be assumed to offer unlimited service indefinitely.
 
 ---
 
-## 7. Feature Matrix: Working vs. Simulated vs. API Key
+## 9. Configuration and Sample Data
 
-| Feature | Without API Key (Demo Mode) | With Gemini API Key | Requires Paid Host? |
-| :--- | :--- | :--- | :--- |
-| **Workflow Explorer** | Fully interactive (deterministic AP statutory legal engine) | Live generative re-sequencing via Gemini 3.8 Flash | No (100% Free) |
-| **Step Adding / Editing** | Fully functional (real-time recalculation) | Fully functional | No (100% Free) |
-| **Applicant Profile SSOT** | Fully functional (localStorage persistence, JSON export/import) | Fully functional | No (100% Free) |
-| **Form Mapping & Guardrails** | Fully dynamic across 4 departmental forms | Fully dynamic | No (100% Free) |
-| **Document Upload & OCR** | PDF, image, text parsing with rule-based conflict checks | Full multimodal Gemini analysis | No (100% Free) |
-| **Operational Readiness Delay** | Interactive slider (+0 to +60d) with live financial calculations | Interactive slider | No (100% Free) |
-| **Chamber Telemetry & FEFO** | Live temperature tracking & excursion alerts | Live temperature tracking | No (100% Free) |
-| **Impact Dashboard** | Dynamic metrics reacting to user step modifications | Dynamic metrics | No (100% Free) |
-| **Audit Report Export** | PDF (Print), Markdown (.md), and JSON (.json) downloads | PDF, Markdown, and JSON downloads | No (100% Free) |
+The following are example paths from the intended project structure. They may differ from the actual repository.
 
----
+| Purpose | Example path |
+|---|---|
+| Regulatory workflow data | `src/data/regulatoryData.ts` |
+| Applicant profile defaults | `src/data/profileData.ts` |
+| Synthetic document examples | `src/data/documentsData.ts` |
+| Inventory and telemetry data | `src/data/inventoryData.ts` |
 
-## 8. How to Change Sample Regulatory Workflows & Assumptions
+Inspect the actual source tree before editing these files. Update sample values, assumptions, legal references, and test cases consistently.
 
-All regulatory data, time limits, and baseline numbers are cleanly modularized:
-
-- **Process Steps & Statutory Sections**: Edit `/src/data/regulatoryData.ts` to adjust standard turnaround days, add departments, or change legal citations.
-- **Applicant Profile Defaults**: Edit `/src/data/profileData.ts` to configure the default business entity (e.g., location, cold storage capacity, or utility demands).
-- **Synthetic Regulatory Documents**: Edit `/src/data/documentsData.ts` to add sample clearances or introduce custom document conflicts.
-- **Chamber Telemetry & Inventory Batches**: Edit `/src/data/inventoryData.ts` to configure cold room temperature setpoints, batch expiry dates, and sensor IDs.
+Synthetic records should be clearly identified as examples and should not be presented as actual government records or live business data.
 
 ---
 
-## 9. Regulatory & Legal Disclaimer
+## 10. Testing and Validation
 
-The lead-time reduction (124 to 38 business days) modeled in ProcessLens AI represents a **computational simulation benchmark** based on statutory SLAs codified in the *Andhra Pradesh Single Desk Clearance Act, 2015 (Act No. 19 of 2015)* and FSSAI Executive Orders. Modeled scenarios assume complete, compliant documentation filings by the applicant. **AI systems cannot unilaterally grant statutory licenses or waive mandatory physical inspections without valid legislative authority.**
+Before presenting or deploying ProcessLens AI, verify the following:
+
+- [ ] The application starts successfully.
+- [ ] The production build completes without errors.
+- [ ] Workflow stages can be added, edited, and deleted.
+- [ ] Calculations update correctly after workflow changes.
+- [ ] Applicant profiles persist as expected and JSON import/export works.
+- [ ] Supported document formats are actually parsed or clearly rejected when unsupported.
+- [ ] AI findings are distinguishable from deterministic rule-based results.
+- [ ] Oversized, corrupted, and unreadable files are handled safely.
+- [ ] Delay simulations use documented assumptions.
+- [ ] Simulated telemetry is clearly labelled.
+- [ ] Exported reports contain the expected data.
+- [ ] API keys are not committed or exposed unintentionally.
+- [ ] Legal references and statutory requirements have been verified against official sources.
+
+A successful build confirms that the project compiles; it does not independently verify legal accuracy, AI reliability, security, or every feature's runtime behaviour.
 
 ---
 
-## 10. License
+## 11. Limitations
 
-Apache-2.0 License.
+ProcessLens AI is a prototype intended for workflow analysis, process-reengineering exploration, and decision support.
+
+- It is not an official Andhra Pradesh government portal.
+- It does not issue, approve, or guarantee government permissions or licences.
+- Its modeled processing times and impact estimates depend on configurable assumptions.
+- AI-generated observations can be incomplete or incorrect.
+- Sample telemetry does not represent live sensor measurements unless explicitly integrated.
+- Regulatory requirements can change and may vary by applicant and location.
+- Official requirements must be confirmed with the competent authority before action is taken.
+
+---
+
+## 12. Future Scope
+
+Potential extensions include:
+
+- A broader citizen-facing service catalogue for students, families, entrepreneurs, and senior citizens.
+- Multilingual guided application assistance.
+- Official-source links and versioned regulatory references.
+- Better document extraction and explainable validation rules.
+- Accessible interfaces for users with different needs.
+- Verified integrations with government systems where authorised.
+- Real sensor integrations for cold-chain monitoring.
+- Evidence-based evaluation of processing time, paperwork, and visit reduction.
+- Role-based review workflows for authorised human reviewers.
+
+These are proposed extensions and should not be interpreted as existing capabilities unless implemented.
+
+---
+
+## 13. License
+
+This project is intended to use the Apache License 2.0.
+
+Include the full Apache-2.0 `LICENSE` file in the repository before claiming that the project is distributed under this licence. Confirm that third-party dependencies and assets comply with their respective licences.
+
+---
+
+## 14. Acknowledgment
+
+ProcessLens AI explores how AI-assisted analysis, structured data, and process modelling can help identify opportunities for simpler and more transparent public-service workflows.
+
+Its central goal is to support better-informed process redesign while preserving legal safeguards, departmental accountability, and human oversight.
